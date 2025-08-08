@@ -1,3 +1,7 @@
+-- Function: ELT.uf_GetIngestionColumnList
+-- Purpose: Returns a comma-separated list of source-to-target column mappings for a given IngestID.
+-- The function queries the [ELT].[ColumnMapping] table for active mappings and formats them as 'SourceName as TargetName', ordered by TargetOrdinalPosition.
+-- If no columns are found, returns '*'.
 CREATE FUNCTION [ELT].[uf_GetIngestionColumnList]
 (
 	@IngestID INT

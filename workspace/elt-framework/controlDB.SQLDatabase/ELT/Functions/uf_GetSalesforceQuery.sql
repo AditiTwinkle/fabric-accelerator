@@ -1,3 +1,8 @@
+-- Function: ELT.uf_GetSalesforceQuery
+-- Purpose: Dynamically generates a Salesforce SOQL query string for data extraction or statistics based on input parameters.
+-- Supports two query types: 'SourceQuery' (for data extraction) and 'StatQuery' (for min/max/count stats).
+-- Builds column lists and WHERE clauses using column mappings and watermark columns, with flexible date range handling.
+-- Returns the constructed SOQL query as a string.
 CREATE FUNCTION [ELT].[uf_GetSalesforceQuery]
 (
 	@QueryType varchar(20), --SourceQuery|StatQuery
@@ -50,13 +55,13 @@ BEGIN
 								STUFF((
 									SELECT 
 										', ' + SourceName
-								    FROM     
+									FROM     
 										[ELT].[ColumnMapping]
 									WHERE IngestID = @IngestID
 										AND ActiveFlag = 1
 									ORDER BY TargetOrdinalPosition ASC
-								       FOR XML PATH('')
-								       ),1,1,'') AS ColumnList
+									   FOR XML PATH('')
+									   ),1,1,'') AS ColumnList
 						FROM
 							[ELT].[ColumnMapping]
 						WHERE IngestID = @IngestID

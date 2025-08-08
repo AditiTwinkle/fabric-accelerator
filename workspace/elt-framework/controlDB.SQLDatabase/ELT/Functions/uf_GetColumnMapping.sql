@@ -1,3 +1,7 @@
+-- Function: ELT.uf_GetColumnMapping
+-- Purpose: Returns a JSON mapping string for column mappings based on IngestID, L1TransformID, or L2TransformID.
+-- The function queries the [ELT].[ColumnMapping] table and constructs a JSON array of source/target column pairs for use in tabular data translation.
+-- Only active mappings (ActiveFlag = 1) are included. Returns NULL if no mappings are found.
 CREATE FUNCTION [ELT].[uf_GetColumnMapping]
 (
 	@IngestID int NULL,
