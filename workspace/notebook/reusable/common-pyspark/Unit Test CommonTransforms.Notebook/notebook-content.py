@@ -77,37 +77,37 @@ display(input)
 
 # CELL ********************
 
-ct=CommonTransforms(input)
+
+ct = CommonTransforms(input)
 
 # Remove duplicates
-output=ct.deDuplicate()
+output = ct.deduplicate()
 
 # Remove duplicates based on key columns
-output=ct.deDuplicate(["OrderID"])
+output = ct.deduplicate(["OrderID"])
 
 # Remove leading and trailing spaces from all string columns
-output=ct.trim()
+output = ct.trim()
 
 # Replace Null Value with generic values
-output = ct.replaceNull(0)
-output = ct.replaceNull("NA")
-output = ct.replaceNull("2020-01-01")
+output = ct.replace_null(0)
+output = ct.replace_null("NA")
+output = ct.replace_null("2020-01-01")
 
 # Replace Null value in Timestamp columns
-output = ct.replaceNull("1900-01-01T00:00:00","OrderDate")
-output = ct.replaceNull("9999-12-31T23:59:59","ExpectedDeliveryDate")
+output = ct.replace_null("1900-01-01T00:00:00", "OrderDate")
+output = ct.replace_null("9999-12-31T23:59:59", "ExpectedDeliveryDate")
 
 # # Replace Null Values with custom defaults
 # output = ct.replaceNull({"passenger_count":1,"store_and_fwd_flag":"N","tip_amount":0,"tolls_amount":0, "improvement_surcharge":0,"congestion_surcharge":0})
 
 # Convert UTC timestamps to local
 output = ct.utc_to_local("Australia/Sydney")
-output = ct.utc_to_local("Australia/Sydney",["LastEditedWhen"])
+output = ct.utc_to_local("Australia/Sydney", ["LastEditedWhen"])
 
-
-# # Convert local timestamps to UTC
+# Convert local timestamps to UTC
 output = ct.local_to_utc("Australia/Sydney")
-output = ct.local_to_utc("Australia/Sydney",["LastEditedWhen"])
+output = ct.local_to_utc("Australia/Sydney", ["LastEditedWhen"])
 
 # # Convert time from one Timezone to another
 output = ct.changeTimezone("Australia/Sydney","America/New_York")

@@ -124,21 +124,21 @@ WatermarkColName = None
 df = readFile('bronze',InputRawFileSystem,InputRawFileFolder,InputRawFile)
 ingestCount = df.count()
 
-ct=CommonTransforms(df)
+ct = CommonTransforms(df)
 
 # Remove duplicates
 if LookupColumns is not None:
-    df=ct.deDuplicate(LookupColumns.split('|'))
+    df = ct.deduplicate(LookupColumns.split('|'))
 else:
-    df=ct.deDuplicate()
+    df = ct.deduplicate()
 
 # Remove leading and trailing spaces from all string columns
-df=ct.trim()
+df = ct.trim()
 
-# # Replace Null Value with generic values
-df = ct.replaceNull(0)
-df = ct.replaceNull("NA")
-df = ct.replaceNull("2020-01-01")
+# Replace Null Value with generic values
+df = ct.replace_null(0)
+df = ct.replace_null("NA")
+df = ct.replace_null("2020-01-01")
 
 # METADATA ********************
 
